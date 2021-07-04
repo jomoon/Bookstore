@@ -23,7 +23,7 @@ func main() {
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
-
+	// 将日志关闭
 	proc.AddShutdownListener(func() {
 		logx.Close()
 	})

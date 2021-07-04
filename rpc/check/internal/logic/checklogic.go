@@ -26,6 +26,8 @@ func NewCheckLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CheckLogic 
 func (l *CheckLogic) Check(in *check.CheckReq) (*check.CheckResp, error) {
 	// todo: add your logic here and delete this line
 	resp, err := l.svcCtx.Model.FindOne(in.Book)
+	username := l.ctx.Value("username")
+	logx.Infof("username %v", username)
 	if err != nil {
 		return nil, err
 	}

@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 
+	"Bookstore/api/internal/errorx"
 	"Bookstore/api/internal/svc"
 	"Bookstore/api/internal/types"
 	"Bookstore/rpc/check/checker"
@@ -26,12 +27,13 @@ func NewCheckLogic(ctx context.Context, svcCtx *svc.ServiceContext) CheckLogic {
 
 func (l *CheckLogic) Check(req types.CheckReq) (*types.CheckResp, error) {
 	// todo: add your logic here and delete this line
+	logx.Infof("username %v", l.ctx.Value("username"))
 	resp, err := l.svcCtx.Checker.Check(l.ctx, &checker.CheckReq{
 		Book: req.Book,
 	})
 	if err != nil {
 		logx.Error(err)
-		return &types.CheckResp{}, err
+		return &types.CheckResp{}, errorx.NewDefaultError(err.Error())
 	}
 
 	return &types.CheckResp{

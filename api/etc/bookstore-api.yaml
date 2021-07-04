@@ -14,8 +14,8 @@ Check:
     Key: check.rpc
 
 
-Log:
-  Level: error
+# Log:
+#   Level: error
 
 
 Auth:
