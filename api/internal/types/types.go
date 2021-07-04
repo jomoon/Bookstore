@@ -18,3 +18,14 @@ type CheckResp struct {
 	Found bool  `json:"found"`
 	Price int64 `json:"price"`
 }
+
+type LoginReq struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
+type LoginResp struct {
+	Exp      int64  `json:"exp"`
+	Username string `json:"username"`
+	Token    string `json:"token"`
+}

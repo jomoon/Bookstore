@@ -16,3 +16,9 @@ Check:
 
 Log:
   Level: error
+
+
+Auth:
+  # AccessSecret: $AccessSecret 如何使用默认值， $ 这个又如何转意
+  AccessSecret: AccessSecret
+  AccessExpire: 32000

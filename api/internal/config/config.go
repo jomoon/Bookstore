@@ -9,4 +9,9 @@ type Config struct {
 	rest.RestConf
 	Add   zrpc.RpcClientConf
 	Check zrpc.RpcClientConf
+
+	Auth struct {
+		AccessSecret string
+		AccessExpire int64
+	}
 }

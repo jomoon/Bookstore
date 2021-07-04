@@ -25,10 +25,29 @@ type checkResp {
 	Price int64 `json:"price"`
 }
 
+@server(
+	jwt: Auth
+)
 service bookstore-api {
 	@handler AddHandler
 	get /add(addReq) returns(addResp)
 	
 	@handler CheckHandler
 	get /check(checkReq) returns(checkResp)
+}
+
+type loginReq {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
+type loginResp {
+	Exp      int64  `json:"exp"`
+	Username string `json:"username"`
+	Token    string `json:"token"`
+}
+
+service bookstore-api {
+	@handler Loginer
+	post /login(loginReq) returns (loginResp)
 }
