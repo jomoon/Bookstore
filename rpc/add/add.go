@@ -10,6 +10,8 @@ import (
 	"Bookstore/rpc/add/internal/svc"
 
 	"github.com/tal-tech/go-zero/core/conf"
+	"github.com/tal-tech/go-zero/core/logx"
+	"github.com/tal-tech/go-zero/core/proc"
 	"github.com/tal-tech/go-zero/zrpc"
 	"google.golang.org/grpc"
 )
@@ -21,6 +23,10 @@ func main() {
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
+
+	proc.AddShutdownListener(func() {
+		logx.Close()
+	})
 	ctx := svc.NewServiceContext(c)
 	srv := server.NewAdderServer(ctx)
 
