@@ -1,6 +1,7 @@
 package main
 
 import (
+	"Bookstore/api/internal/middleware"
 	"flag"
 	"fmt"
 	"net/http"
@@ -24,8 +25,9 @@ func main() {
 	conf.MustLoad(*configFile, &c)
 
 	ctx := svc.NewServiceContext(c)
-	server := rest.MustNewServer(c.RestConf)
+	server := rest.MustNewServer(c.RestConf, rest.WithNotAllowedHandler(middleware.NewCorsMiddleware().Handler()))
 	defer server.Stop()
+	server.Use(middleware.NewCorsMiddleware().Handle)
 
 	handler.RegisterHandlers(server, ctx)
 
